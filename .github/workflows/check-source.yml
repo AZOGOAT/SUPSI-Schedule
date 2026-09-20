@@ -1,0 +1,17 @@
+name: Check source reachability
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch the Untis navigation frame from a GitHub runner
+        run: |
+          status=$(curl -sS -o /dev/null -w "%{http_code}" "https://www3.supsi.ch/inside/area_riservata_dti/orari/definitivi/frames/navbar.htm")
+          echo "HTTP $status"
+          test "$status" = "200"

@@ -1,0 +1,59 @@
+{
+  "year": "2026-2027",
+  "semesters": [
+    {
+      "id": "SA2026",
+      "label": "Semestre autunnale 2026",
+      "start": "2026-09-14",
+      "end": "2026-12-18"
+    },
+    {
+      "id": "SP2027",
+      "label": "Semestre primaverile 2027",
+      "start": "2027-02-22",
+      "end": "2027-06-11",
+      "endFinalYear": "2027-05-07"
+    }
+  ],
+  "finalYearClasses": ["I3A", "I3B", "D3A", "E3A", "G3A", "M3A", "I4P", "G4P"],
+  "events": [
+    { "start": "2026-08-17", "end": "2026-09-11", "title": "Corso introduttivo", "type": "info" },
+    { "start": "2026-08-31", "end": "2026-09-04", "title": "Corsi a blocco", "type": "info" },
+    { "date": "2026-09-14", "title": "Inizio Semestre Autunnale", "type": "info" },
+    { "date": "2026-11-01", "title": "Ognissanti", "type": "holiday" },
+    { "date": "2026-12-08", "title": "Immacolata", "type": "holiday" },
+    { "date": "2026-12-18", "title": "Fine Semestre Autunnale", "type": "info" },
+    { "start": "2026-12-24", "end": "2027-01-06", "title": "Pausa natalizia", "type": "break" },
+    { "start": "2027-01-11", "end": "2027-01-30", "title": "Esami/Test Semestre Autunnale", "type": "exams" },
+    { "start": "2027-02-01", "end": "2027-02-12", "title": "Corsi a blocco", "type": "info" },
+    { "date": "2027-02-05", "title": "Consiglio di Classe (BSc)", "type": "info" },
+    { "start": "2027-02-08", "end": "2027-02-19", "title": "Presentazione tesi MSE", "type": "info" },
+    { "start": "2027-02-11", "end": "2027-02-13", "title": "Esami lingue (provvisorio)", "type": "exams" },
+    { "date": "2027-02-22", "title": "Inizio Semestre Primaverile", "type": "info" },
+    { "date": "2027-03-19", "title": "San Giuseppe", "type": "holiday" },
+    { "start": "2027-03-26", "end": "2027-04-04", "title": "Pausa pasquale", "type": "break" },
+    { "date": "2027-05-01", "title": "Festa del Lavoro", "type": "holiday" },
+    { "date": "2027-05-06", "title": "Ascensione", "type": "holiday" },
+    { "date": "2027-05-07", "title": "Fine Semestre Primaverile (ultimo semestre)", "type": "info" },
+    { "start": "2027-05-13", "end": "2027-05-28", "title": "Esami Semestre Primaverile (semestre finale)", "type": "exams" },
+    { "date": "2027-05-17", "title": "Lunedì di Pentecoste", "type": "holiday" },
+    { "date": "2027-05-27", "title": "Corpus Domini", "type": "holiday" },
+    { "date": "2027-05-31", "title": "Inizio progetti BAC", "type": "info" },
+    { "date": "2027-06-11", "title": "Fine Semestre Primaverile (semestri inferiori)", "type": "info" },
+    { "start": "2027-06-14", "end": "2027-06-18", "title": "Esami di Appello MSE SA", "type": "exams" },
+    { "start": "2027-06-17", "end": "2027-07-03", "title": "Esami Semestre Primaverile", "type": "exams" },
+    { "start": "2027-06-18", "end": "2027-06-26", "title": "Esami lingue (provvisorio)", "type": "exams" },
+    { "date": "2027-06-29", "title": "San Pietro e Paolo", "type": "holiday" },
+    { "start": "2027-07-05", "end": "2027-07-09", "title": "Corsi a blocco", "type": "info" },
+    { "date": "2027-07-07", "title": "Consiglio di Classe (BSc)", "type": "info" },
+    { "date": "2027-07-10", "title": "Sospensione progetti BAC", "type": "info" },
+    { "date": "2027-08-23", "title": "Ripresa progetti BAC", "type": "info" },
+    { "start": "2027-08-26", "end": "2027-09-11", "title": "Esami di Appello BSc SA+SP e MSE SP", "type": "exams" },
+    { "date": "2027-09-01", "title": "Consegna progetti BAC", "type": "info" },
+    { "start": "2027-09-01", "end": "2027-09-04", "title": "Esami lingue (provvisorio)", "type": "exams" },
+    { "start": "2027-09-09", "end": "2027-09-10", "title": "Presentazioni progetti BAC", "type": "info" },
+    { "start": "2027-09-09", "end": "2027-09-10", "title": "Presentazioni progetti MSE", "type": "info" },
+    { "start": "2027-09-13", "end": "2027-09-17", "title": "Presentazione tesi MSE", "type": "info" },
+    { "date": "2027-09-20", "title": "Inizio Prossimo Anno Accademico", "type": "info" }
+  ]
+}
