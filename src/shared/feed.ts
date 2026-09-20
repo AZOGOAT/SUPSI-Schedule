@@ -1,9 +1,8 @@
 import { academicEvents, addDays, expandLessons, findClass, type Occurrence } from "./events";
 import { type AllDayIcsEvent, buildCalendar, type TimedIcsEvent } from "./ics";
-import { baseName } from "./names";
 import type { Lang, Selection } from "./selection";
 import { slugify } from "./slug";
-import type { AcademicCalendar, ClassTimetable, Timetable } from "./types";
+import type { AcademicCalendar, ClassTimetable, LessonKind, Timetable } from "./types";
 
 export interface FeedInput {
   timetable: Timetable;
@@ -72,24 +71,32 @@ export function calendarName(timetable: Timetable, selection: Selection): string
   return extra > 0 ? `${label} +${extra}` : label;
 }
 
-function kindLabel(kind: Occurrence["lesson"]["kind"], labels: Labels): string | null {
+function kindLabel(kind: LessonKind, labels: Labels): string {
   if (kind === "C") return labels.lecture;
   if (kind === "E") return labels.exercises;
-  if (kind === "L") return labels.lab;
-  return null;
+  return labels.lab;
 }
 
+function kindList(kinds: LessonKind[], labels: Labels): string {
+  return kinds.map((kind) => kindLabel(kind, labels)).join(", ");
+}
+
+/** The name alone when a lecture is in the slot, else the name with the kinds. */
 function summary(occurrence: Occurrence, labels: Labels): string {
-  const { name, kind } = occurrence.lesson;
-  if (kind === "E" || kind === "L") return `${baseName(name)} (${kindLabel(kind, labels)})`;
-  return name;
+  const { name, kinds } = occurrence.slot;
+  if (kinds.length === 0 || kinds.includes("C")) return name;
+  return `${name} (${kindList(kinds, labels)})`;
 }
 
 function location(occurrence: Occurrence, timetable: Timetable): string | null {
-  const { room } = occurrence.lesson;
-  if (!room) return null;
-  const roomName = timetable.rooms[room];
-  return roomName ? `${room} ${roomName}` : room;
+  const { rooms } = occurrence.slot;
+  if (rooms.length === 0) return null;
+  return rooms
+    .map((room) => {
+      const roomName = timetable.rooms[room];
+      return roomName ? `${room} ${roomName}` : room;
+    })
+    .join(", ");
 }
 
 function formatUpdated(localIso: string): string {
@@ -98,27 +105,23 @@ function formatUpdated(localIso: string): string {
 }
 
 function description(occurrence: Occurrence, timetable: Timetable, labels: Labels): string {
-  const { lesson } = occurrence;
+  const { slot } = occurrence;
   const lines: string[] = [];
-  if (lesson.teacher) {
-    const fullName = timetable.teachers[lesson.teacher];
-    lines.push(
-      `${labels.teacher}: ${fullName ? `${fullName} (${lesson.teacher})` : lesson.teacher}`,
-    );
+  for (const teacher of slot.teachers) {
+    const fullName = timetable.teachers[teacher];
+    lines.push(`${labels.teacher}: ${fullName ? `${fullName} (${teacher})` : teacher}`);
   }
-  lines.push(`${labels.course}: ${lesson.module} (${lesson.code})`);
+  lines.push(`${labels.course}: ${slot.module} (${slot.codes.join(", ")})`);
   lines.push(`${labels.class}: ${occurrence.className}`);
-  const kind = kindLabel(lesson.kind, labels);
-  if (kind) lines.push(`${labels.type}: ${kind}`);
+  if (slot.kinds.length > 0) lines.push(`${labels.type}: ${kindList(slot.kinds, labels)}`);
   lines.push(`${labels.source}: ${timetable.source}`);
   lines.push(`${labels.updated}: ${formatUpdated(timetable.sourceUpdatedAt)}`);
   return lines.join("\n");
 }
 
 function uid(occurrence: Occurrence): string {
-  const { lesson } = occurrence;
-  const who = lesson.teacher ?? lesson.room ?? "x";
-  return `${occurrence.classId}-${occurrence.date}-${occurrence.start.replace(":", "")}-${lesson.code}-${who}@supsi-schedule`;
+  const { classId, date, start, slot } = occurrence;
+  return `${classId}-${date}-${start.replace(":", "")}-${slot.module}@supsi-schedule`;
 }
 
 function nudgeDate(timetable: Timetable, calendar: AcademicCalendar): string {

@@ -1,12 +1,10 @@
-import { skipKey } from "../shared/events";
 import {
   formatSelection,
   parseSelection,
   type Selection,
   SelectionError,
 } from "../shared/selection";
-import type { ClassTimetable, Lesson } from "../shared/types";
-import type { LessonGroup } from "./grid";
+import type { ClassTimetable } from "../shared/types";
 import { feedSelection } from "./subscribe";
 
 /** The selection encoded in the page query, or null when there is none worth showing. */
@@ -49,41 +47,6 @@ export function toggleModule(selection: Selection, cls: ClassTimetable, module: 
       return { ...entry, modules: complete ? null : ordered };
     }),
   };
-}
-
-export function isLessonSelected(selection: Selection, classId: string, lesson: Lesson): boolean {
-  if (!isModuleSelected(selection, classId, lesson.module)) return false;
-  const key = skipKey(lesson);
-  return key === null || !selection.skip.includes(key);
-}
-
-/** A parallel group is in the calendar while any of its lessons is. */
-export function isGroupSelected(
-  selection: Selection,
-  classId: string,
-  group: LessonGroup,
-): boolean {
-  return group.lessons.some((lesson) => isLessonSelected(selection, classId, lesson));
-}
-
-/**
- * A tap on one group of a split slot hides that group or brings it back. A group whose module
- * is out, or that cannot be told apart from the others, toggles the whole module instead.
- */
-export function toggleGroup(
-  selection: Selection,
-  cls: ClassTimetable,
-  group: LessonGroup,
-): Selection {
-  const keys = group.lessons.map(skipKey).filter((key): key is string => key !== null);
-  if (keys.length === 0 || !isModuleSelected(selection, cls.id, group.module)) {
-    return toggleModule(selection, cls, group.module);
-  }
-  const hidden = keys.every((key) => selection.skip.includes(key));
-  const skip = hidden
-    ? selection.skip.filter((key) => !keys.includes(key))
-    : [...new Set([...selection.skip, ...keys])];
-  return { ...selection, skip };
 }
 
 export function setClass(selection: Selection, index: number, classId: string): Selection {

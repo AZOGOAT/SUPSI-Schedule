@@ -8,8 +8,6 @@ export interface ClassSelection {
 
 export interface Selection {
   classes: ClassSelection[];
-  /** Parallel groups to hide, as "code@teacher" or "code@room" */
-  skip: string[];
   academic: boolean;
   lang: Lang;
 }
@@ -18,7 +16,6 @@ export class SelectionError extends Error {}
 
 const CLASS_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 const MODULE = /^[A-Za-z0-9_]+\+?$/;
-const SKIP_KEY = /^[A-Za-z0-9_+-]+@[A-Za-z0-9.-]+$/;
 
 function parseFlag(value: string | null, name: string): boolean {
   if (value === null || value === "1") return true;
@@ -32,7 +29,7 @@ function parseLang(value: string | null): Lang {
   throw new SelectionError("lang must be en or it");
 }
 
-/** Parses the feed and page query grammar: sel=class[:module,...][;...]&skip=code@teacher,...&academic=0|1&lang=en|it */
+/** Parses the feed and page query grammar: sel=class[:module,...][;...]&academic=0|1&lang=en|it */
 export function parseSelection(params: URLSearchParams): Selection {
   const sel = params.get("sel");
   if (!sel) throw new SelectionError("missing sel parameter");
@@ -55,14 +52,8 @@ export function parseSelection(params: URLSearchParams): Selection {
     }
     classes.push({ classId, modules });
   }
-  const skipParam = params.get("skip");
-  const skip = skipParam ? skipParam.split(",") : [];
-  for (const key of skip) {
-    if (!SKIP_KEY.test(key)) throw new SelectionError(`bad skip key "${key}"`);
-  }
   return {
     classes,
-    skip,
     academic: parseFlag(params.get("academic"), "academic"),
     lang: parseLang(params.get("lang")),
   };
@@ -77,7 +68,6 @@ export function formatSelection(selection: Selection): string {
     .map((c) => (c.modules ? `${c.classId}:${c.modules.join(",")}` : c.classId))
     .join(";");
   const parts = [`sel=${sel}`];
-  if (selection.skip.length > 0) parts.push(`skip=${selection.skip.join(",")}`);
   if (!selection.academic) parts.push("academic=0");
   if (selection.lang !== "en") parts.push(`lang=${selection.lang}`);
   return parts.join("&").replaceAll("+", "%2B");

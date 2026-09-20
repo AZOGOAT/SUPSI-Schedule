@@ -1,15 +1,5 @@
-import { baseName } from "../shared/names";
-import type { Lesson, LessonKind } from "../shared/types";
-
-export interface LessonGroup {
-  module: string;
-  /** teacher, else room, else empty: what tells parallel groups apart */
-  key: string;
-  teacher: string | null;
-  /** distinct rooms of the group, comma separated */
-  room: string | null;
-  lessons: Lesson[];
-}
+import { mergeSlots, type Slot } from "../shared/slots";
+import type { Lesson } from "../shared/types";
 
 export interface GridBlock {
   day: number;
@@ -18,10 +8,7 @@ export interface GridBlock {
   end: number;
   lane: number;
   lanes: number;
-  module: string;
-  name: string;
-  kinds: LessonKind[];
-  groups: LessonGroup[];
+  slot: Slot;
 }
 
 export interface GridLayout {
@@ -33,46 +20,19 @@ export interface GridLayout {
 
 const DEFAULT_FIRST = 8 * 60;
 const DEFAULT_LAST = 18 * 60;
-const KIND_ORDER: LessonKind[] = ["C", "E", "L"];
 
 export function toMinutes(time: string): number {
   const [hours, minutes] = time.split(":");
   return Number(hours) * 60 + Number(minutes);
 }
 
-/** Distinct kinds in lecture, exercises, lab order. */
-export function sortKinds(lessons: Lesson[]): LessonKind[] {
-  const kinds = new Set<LessonKind>();
-  for (const lesson of lessons) if (lesson.kind) kinds.add(lesson.kind);
-  return KIND_ORDER.filter((kind) => kinds.has(kind));
-}
-
-/** The longest published name of a set of lessons, without the Es. and Lab. prefixes. */
-export function longestName(lessons: Lesson[]): string {
-  return lessons.map((l) => baseName(l.name)).reduce((a, b) => (b.length > a.length ? b : a), "");
-}
-
-/** Parallel groups of one slot: lessons with the same teacher (or, without one, the same room) are one group. */
-export function groupLessons(lessons: Lesson[]): LessonGroup[] {
-  const groups: LessonGroup[] = [];
-  for (const lesson of lessons) {
-    const key = lesson.teacher ?? lesson.room ?? "";
-    let group = groups.find((g) => g.key === key);
-    if (!group) {
-      group = { module: lesson.module, key, teacher: lesson.teacher, room: null, lessons: [] };
-      groups.push(group);
-    }
-    group.lessons.push(lesson);
-  }
-  for (const group of groups) {
-    const rooms = [...new Set(group.lessons.flatMap((l) => (l.room ? [l.room] : [])))];
-    group.room = rooms.length > 0 ? rooms.join(", ") : null;
-  }
-  return groups;
-}
-
 function compareBlocks(a: GridBlock, b: GridBlock): number {
-  return a.day - b.day || a.start - b.start || b.end - a.end || a.module.localeCompare(b.module);
+  return (
+    a.day - b.day ||
+    a.start - b.start ||
+    b.end - a.end ||
+    a.slot.module.localeCompare(b.slot.module)
+  );
 }
 
 function assignLanes(dayBlocks: GridBlock[]): void {
@@ -102,8 +62,8 @@ function assignLanes(dayBlocks: GridBlock[]): void {
 }
 
 /**
- * Places a class's lessons on a week grid: one block per module and slot, parallel groups inside
- * it, and blocks of different modules side by side only while they overlap.
+ * Places a class's lessons on a week grid: one block per module and slot, and blocks of
+ * different modules side by side only while they overlap.
  */
 export function layoutGrid(lessons: Lesson[]): GridLayout {
   let days = [1, 2, 3, 4, 5];
@@ -117,32 +77,14 @@ export function layoutGrid(lessons: Lesson[]): GridLayout {
     lastMinute = Math.ceil(Math.max(...lessons.map((l) => toMinutes(l.end))) / 60) * 60;
   }
 
-  const slots = new Map<string, Lesson[]>();
-  for (const lesson of lessons) {
-    const key = `${lesson.day}|${lesson.start}|${lesson.end}|${lesson.module}`;
-    const slot = slots.get(key);
-    if (slot) slot.push(lesson);
-    else slots.set(key, [lesson]);
-  }
-  const blocks: GridBlock[] = [];
-  for (const slotLessons of slots.values()) {
-    const groups = groupLessons(slotLessons);
-    const [first] = groups;
-    if (!first) continue;
-    const [lesson] = first.lessons;
-    if (!lesson) continue;
-    blocks.push({
-      day: lesson.day,
-      start: toMinutes(lesson.start),
-      end: toMinutes(lesson.end),
-      lane: 0,
-      lanes: 1,
-      module: lesson.module,
-      name: longestName(slotLessons),
-      kinds: sortKinds(slotLessons),
-      groups,
-    });
-  }
+  const blocks: GridBlock[] = mergeSlots(lessons).map((slot) => ({
+    day: slot.day,
+    start: toMinutes(slot.start),
+    end: toMinutes(slot.end),
+    lane: 0,
+    lanes: 1,
+    slot,
+  }));
   blocks.sort(compareBlocks);
   for (const day of days) assignLanes(blocks.filter((b) => b.day === day));
 

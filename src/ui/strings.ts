@@ -20,10 +20,8 @@ const en = {
   step2: "Remove what you do not follow",
   step2Help:
     "Everything starts in your calendar. Tap a lesson to take it out, tap again to put it back.",
-  splitHelp: "Two groups run at the same time. Tap the one you are not in to remove it.",
   addedHelp:
     "Nothing from this class is in your calendar yet. Tap the lessons you follow to add them.",
-  groups: "{n} groups",
   jumpTo: "Jump to a day",
   courses: "Your courses",
   coursesButton: "Courses",
@@ -135,10 +133,8 @@ const it: Strings = {
   step2: "Togli quello che non segui",
   step2Help:
     "All'inizio è tutto nel calendario. Tocca una lezione per toglierla, tocca di nuovo per rimetterla.",
-  splitHelp: "Due gruppi si svolgono alla stessa ora. Tocca quello in cui non sei per toglierlo.",
   addedHelp:
     "Di questa classe non c'è ancora nulla nel calendario. Tocca le lezioni che segui per aggiungerle.",
-  groups: "{n} gruppi",
   jumpTo: "Vai a un giorno",
   courses: "I tuoi corsi",
   coursesButton: "Corsi",

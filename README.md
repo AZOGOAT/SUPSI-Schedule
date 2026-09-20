@@ -1,6 +1,6 @@
 # SUPSI DTI timetable
 
-Turns the DTI class timetable into a calendar subscription you can add to Apple Calendar, Google Calendar or Outlook. Pick your class, tap away the lessons you do not follow, choose your group where the class is split, and the calendar keeps itself in sync when SUPSI republishes the timetable.
+Turns the DTI class timetable into a calendar subscription you can add to Apple Calendar, Google Calendar or Outlook. Pick your class, tap away the lessons you do not follow, and the calendar keeps itself in sync when SUPSI republishes the timetable.
 
 Unofficial student project, not affiliated with SUPSI. The timetable data comes from the [official DTI timetable](https://www3.supsi.ch/inside/area_riservata_dti/orari/definitivi/) as published; no guarantees.
 
@@ -8,16 +8,15 @@ Unofficial student project, not affiliated with SUPSI. The timetable data comes 
 
 - A GitHub Actions job fetches the Untis HTML export every three hours, parses every class page and commits `public/data/timetable.json` when something changed. The scrape stops early when the export's "ultimo aggiornamento" time has not moved.
 - The site is a static page on Cloudflare Pages. A Pages Function at `/api/ics` turns a selection into an iCalendar feed on request.
-- Each lesson becomes one event per week of the semester, in Europe/Zurich time, with the course name and type, room code and room name, teacher, course code and class in the event. Holidays and breaks from the DTI academic calendar are left out; the calendar entries themselves can be added as all-day events.
+- Each lesson becomes one event per week of the semester, in Europe/Zurich time, with the course name and type, the rooms with their names, the teachers, the course code and the class in the event. Where Untis lists a lesson twice, once per teacher or room, the calendar shows one event with all of them. Holidays and breaks from the DTI academic calendar are left out; the calendar entries themselves can be added as all-day events.
 
 ## Feed URL
 
 ```text
-/api/ics?sel=i1a-informatica:E1204,B1201;approfondimenti-ultimo-anno:I5331&skip=E-E1204@RVR&academic=1&lang=en
+/api/ics?sel=i1a-informatica:E1204,B1201;approfondimenti-ultimo-anno:I5331&academic=1&lang=en
 ```
 
 - `sel`: classes separated by `;`, each `classId[:module,module,...]`. A class without a module list means all of its modules. Class ids are the lowercase class names, for example `i1a-informatica` or `mse-cs-ds`. Precalcolo+ keeps its plus as part of the module id, written `B1201%2B` in a URL, so it can be dropped without touching the regular Precalcolo lessons.
-- `skip`: parallel groups to hide, as `code@teacher` (or `code@room` when the lesson has no teacher), separated by `,`.
 - `academic`: `1` (default) or `0` for the academic calendar events.
 - `lang`: `en` (default) or `it` for the event labels.
 

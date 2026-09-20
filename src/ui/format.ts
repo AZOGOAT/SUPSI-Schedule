@@ -1,6 +1,6 @@
 import { addDays } from "../shared/events";
+import type { Slot } from "../shared/slots";
 import type { LessonKind, Timetable } from "../shared/types";
-import type { LessonGroup } from "./grid";
 import { fill, type Strings } from "./strings";
 
 export function kindLabel(kind: LessonKind, s: Strings): string {
@@ -16,19 +16,21 @@ export function blockTitle(name: string, kinds: LessonKind[], s: Strings): strin
 }
 
 /** The teacher's surname, as Untis publishes names surname first; the abbreviation when unknown. */
-export function teacherLabel(abbr: string | null, timetable: Timetable): string | null {
-  if (!abbr) return null;
+export function teacherLabel(abbr: string, timetable: Timetable): string {
   const full = timetable.teachers[abbr];
   if (!full) return abbr;
   const [surname] = full.split(" ");
   return surname && surname.length > 0 ? surname : full;
 }
 
-/** Room and teacher of a group, as shown on a lesson block. */
-export function groupMeta(group: LessonGroup, timetable: Timetable): string[] {
-  return [group.room, teacherLabel(group.teacher, timetable)].filter(
-    (part): part is string => part !== null,
-  );
+/** The rooms, then the teachers of a slot, as shown on a lesson block; each list comma separated. */
+export function slotMeta(slot: Slot, timetable: Timetable): string[] {
+  const parts: string[] = [];
+  if (slot.rooms.length > 0) parts.push(slot.rooms.join(", "));
+  if (slot.teachers.length > 0) {
+    parts.push(slot.teachers.map((abbr) => teacherLabel(abbr, timetable)).join(", "));
+  }
+  return parts;
 }
 
 export function shortDate(iso: string, s: Strings): string {

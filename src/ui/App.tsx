@@ -16,7 +16,6 @@ import {
   isModuleSelected,
   removeClass,
   setClass,
-  toggleGroup,
   toggleModule,
   writeSelection,
 } from "./state";
@@ -123,7 +122,7 @@ export function App({
       setSelection((current) =>
         current
           ? setClass(current, index, classId)
-          : { classes: [{ classId, modules: null }], skip: [], academic: true, lang },
+          : { classes: [{ classId, modules: null }], academic: true, lang },
       );
     },
     addClass(classId) {
@@ -134,9 +133,6 @@ export function App({
     },
     toggleModule(cls, module) {
       setSelection((current) => current && toggleModule(current, cls, module));
-    },
-    toggleGroup(cls, group) {
-      setSelection((current) => current && toggleGroup(current, cls, group));
     },
     toggleAcademic() {
       setSelection((current) => current && { ...current, academic: !current.academic });

@@ -1,13 +1,12 @@
 import { type ReactNode, useId } from "react";
 import { cn } from "@/ui/cn";
 import { Checkbox } from "@/ui/components/checkbox";
-import { Toggle } from "@/ui/components/toggle";
 import type { Selection } from "../shared/selection";
 import type { ClassTimetable, Timetable } from "../shared/types";
 import type { Actions } from "./actions";
 import { courseSummaries } from "./courses";
-import { groupMeta, kindLabel } from "./format";
-import { isGroupSelected, isModuleSelected } from "./state";
+import { kindLabel, slotMeta } from "./format";
+import { isModuleSelected } from "./state";
 import { fill, type Strings } from "./strings";
 
 interface TitleProps {
@@ -34,7 +33,7 @@ interface CoursesProps {
   actions: Actions;
 }
 
-/** The course list of one class: a checkbox per module, a line per weekly slot, a chip per parallel group. */
+/** The course list of one class: a checkbox per module and a line per weekly slot with its rooms and teachers. */
 export function Courses({ title, cls, selection, timetable, s, actions }: CoursesProps) {
   const id = useId();
   const summaries = courseSummaries(cls);
@@ -80,7 +79,6 @@ export function Courses({ title, cls, selection, timetable, s, actions }: Course
                   const kind = slot.kinds.includes("C")
                     ? null
                     : slot.kinds.map((k) => kindLabel(k, s)).join(", ");
-                  const [only] = slot.groups;
                   return (
                     <li
                       key={`${slot.day}-${slot.start}`}
@@ -90,22 +88,9 @@ export function Courses({ title, cls, selection, timetable, s, actions }: Course
                         {s.days[slot.day - 1]} {slot.start}-{slot.end}
                       </span>
                       {kind && <span className="text-faint">{kind}</span>}
-                      {slot.groups.length === 1 && only ? (
-                        <span>{groupMeta(only, timetable).join(" ")}</span>
-                      ) : (
-                        <span className="inline-flex flex-wrap gap-1.5">
-                          {slot.groups.map((group) => (
-                            <Toggle
-                              key={group.key}
-                              variant="chip"
-                              pressed={isGroupSelected(selection, cls.id, group)}
-                              onPressedChange={() => actions.toggleGroup(cls, group)}
-                            >
-                              {groupMeta(group, timetable).join(" ")}
-                            </Toggle>
-                          ))}
-                        </span>
-                      )}
+                      {slotMeta(slot, timetable).map((part) => (
+                        <span key={part}>{part}</span>
+                      ))}
                     </li>
                   );
                 })}

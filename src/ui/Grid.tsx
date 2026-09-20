@@ -5,13 +5,14 @@ import { ToggleGroup } from "@/ui/components/toggle-group";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/ui/components/tooltip";
 import { addDays } from "../shared/events";
 import type { Selection } from "../shared/selection";
+import type { Slot } from "../shared/slots";
 import type { ClassTimetable, Timetable } from "../shared/types";
 import type { Actions } from "./actions";
-import { blockTitle, dayNumber, groupMeta, hourLabel, timeRange } from "./format";
-import type { GridBlock, GridLayout, LessonGroup } from "./grid";
+import { blockTitle, dayNumber, hourLabel, slotMeta, timeRange } from "./format";
+import type { GridBlock, GridLayout } from "./grid";
 import { CAN_HOVER, useMediaQuery } from "./media";
-import { isGroupSelected, isModuleSelected } from "./state";
-import { fill, type Strings } from "./strings";
+import { isModuleSelected } from "./state";
+import type { Strings } from "./strings";
 
 interface GridProps {
   cls: ClassTimetable;
@@ -44,27 +45,25 @@ const NAME = "wrap-anywhere font-semibold";
 const STRUCK = "line-through decoration-faint";
 
 interface MetaProps {
-  group: LessonGroup;
+  slot: Slot;
   timetable: Timetable;
-  off?: boolean;
-  row?: boolean;
 }
 
-/** Room and teacher: side by side when the container is wide enough, stacked in a narrow one; a half that has one line keeps them side by side. */
-function Meta({ group, timetable, off = false, row = false }: MetaProps) {
-  const parts = groupMeta(group, timetable);
+/** Rooms and teachers: side by side when the container is wide enough and each is a single value, else stacked. */
+function Meta({ slot, timetable }: MetaProps) {
+  const parts = slotMeta(slot, timetable);
+  const single = slot.rooms.length <= 1 && slot.teachers.length <= 1;
   return (
     <span
       className={cn(
-        "flex min-w-0 text-muted",
-        row ? "flex-row gap-2" : "flex-col @min-[7.5rem]:flex-row @min-[7.5rem]:gap-2",
-        off && STRUCK,
+        "flex min-w-0 flex-col text-muted",
+        single && "@min-[7.5rem]:flex-row @min-[7.5rem]:gap-2",
       )}
     >
       {parts.map((part, i) => (
         <span
           key={part}
-          className={cn("truncate", i === 0 && group.room && "shrink-0 font-medium")}
+          className={cn("truncate", i === 0 && slot.rooms.length > 0 && "shrink-0 font-medium")}
         >
           {part}
         </span>
@@ -74,27 +73,20 @@ function Meta({ group, timetable, off = false, row = false }: MetaProps) {
 }
 
 interface DetailProps {
-  block: GridBlock;
-  group: LessonGroup;
+  slot: Slot;
   timetable: Timetable;
 }
 
 /** What the tooltip adds to a block: the full names and the codes behind it. */
-function Detail({ block, group, timetable }: DetailProps) {
-  const teacher = group.teacher ? (timetable.teachers[group.teacher] ?? group.teacher) : null;
-  const rooms = group.room
-    ? group.room
-        .split(", ")
-        .map((code) => timetable.rooms[code] ?? code)
-        .join(", ")
-    : null;
-  const codes = [...new Set(group.lessons.map((lesson) => lesson.code))].join(", ");
+function Detail({ slot, timetable }: DetailProps) {
+  const teachers = slot.teachers.map((abbr) => timetable.teachers[abbr] ?? abbr);
+  const rooms = slot.rooms.map((code) => timetable.rooms[code] ?? code);
   return (
     <>
-      {teacher && <p className="font-semibold">{teacher}</p>}
-      {rooms && <p>{rooms}</p>}
+      {teachers.length > 0 && <p className="font-semibold">{teachers.join(", ")}</p>}
+      {rooms.length > 0 && <p>{rooms.join(", ")}</p>}
       <p className="text-faint">
-        {block.module}, {codes}
+        {slot.module}, {slot.codes.join(", ")}
       </p>
     </>
   );
@@ -110,7 +102,7 @@ interface TappableProps {
   children: ReactNode;
 }
 
-/** A block or a half: a pressed button, with a tooltip on devices that can hover. */
+/** A pressed button, with a tooltip on devices that can hover. */
 function Tappable({ hover, detail, pressed, className, style, onClick, children }: TappableProps) {
   const props = { type: "button" as const, className, style, "aria-pressed": pressed, onClick };
   if (!hover) return <button {...props}>{children}</button>;
@@ -131,95 +123,30 @@ function LessonBlock({ cls, block, layout, selection, timetable, s, actions, hov
     "--lanes": block.lanes,
   } as CSSProperties;
   const short = rows <= 3;
-  const title = blockTitle(block.name, block.kinds, s);
+  const { slot } = block;
+  const title = blockTitle(slot.name, slot.kinds, s);
   const time = timeRange(block.start, block.end);
-  const moduleOn = isModuleSelected(selection, cls.id, block.module);
-  const [first] = block.groups;
-  if (!first) return null;
-
-  if (block.groups.length === 1) {
-    const on = isGroupSelected(selection, cls.id, first);
-    return (
-      <Tappable
-        hover={hover}
-        detail={<Detail block={block} group={first} timetable={timetable} />}
-        pressed={on}
-        style={style}
-        className={cn(
-          BLOCK,
-          HEAD,
-          "cursor-pointer bg-tint hover:bg-tint-strong",
-          !on && [OFF_EDGE, "bg-paper text-muted hover:bg-surface print:hidden"],
-        )}
-        onClick={() =>
-          moduleOn && !on
-            ? actions.toggleGroup(cls, first)
-            : actions.toggleModule(cls, block.module)
-        }
-      >
-        <span className={TIME}>{time}</span>
-        <span className={cn(NAME, short ? "line-clamp-1" : "line-clamp-2", !on && STRUCK)}>
-          {title}
-        </span>
-        <Meta group={first} timetable={timetable} />
-      </Tappable>
-    );
-  }
-
-  const compact = rows <= 5;
-  const anyOn = block.groups.some((group) => isGroupSelected(selection, cls.id, group));
+  const on = isModuleSelected(selection, cls.id, slot.module);
   return (
-    <div
-      className={cn(BLOCK, "flex flex-col bg-paper", !anyOn && [OFF_EDGE, "print:hidden"])}
+    <Tappable
+      hover={hover}
+      detail={<Detail slot={slot} timetable={timetable} />}
+      pressed={on}
       style={style}
-      data-off={anyOn ? undefined : ""}
+      className={cn(
+        BLOCK,
+        HEAD,
+        "cursor-pointer bg-tint hover:bg-tint-strong",
+        !on && [OFF_EDGE, "bg-paper text-muted hover:bg-surface print:hidden"],
+      )}
+      onClick={() => actions.toggleModule(cls, slot.module)}
     >
-      <div
-        className={cn(
-          HEAD,
-          "border-rule border-b",
-          compact && "flex-row items-baseline gap-1.5 pt-1 pb-[3px]",
-          !anyOn && "text-muted",
-        )}
-      >
-        <span className={TIME}>{time}</span>
-        <span
-          className={cn(
-            NAME,
-            compact ? "block min-w-0 truncate" : "line-clamp-2",
-            !anyOn && STRUCK,
-          )}
-        >
-          {title}
-        </span>
-        {!compact && (
-          <span className="text-2xs text-faint">{fill(s.groups, { n: block.groups.length })}</span>
-        )}
-      </div>
-      <div className={cn("flex min-h-0 flex-1 flex-col", compact && "flex-row")}>
-        {block.groups.map((group) => {
-          const on = isGroupSelected(selection, cls.id, group);
-          return (
-            <Tappable
-              key={group.key}
-              hover={hover}
-              detail={<Detail block={block} group={group} timetable={timetable} />}
-              pressed={on}
-              className={cn(
-                "flex min-h-0 min-w-0 flex-1 cursor-pointer items-center overflow-hidden bg-tint py-[3px] pr-2 pl-2.5 text-left text-ink transition-[background-color,color] duration-120 hover:bg-tint-strong motion-reduce:transition-none",
-                compact
-                  ? "@container border-rule not-first:border-l"
-                  : "border-rule not-first:border-t",
-                !on && "bg-paper text-muted hover:bg-surface print:hidden",
-              )}
-              onClick={() => actions.toggleGroup(cls, group)}
-            >
-              <Meta group={group} timetable={timetable} off={!on} row={!compact} />
-            </Tappable>
-          );
-        })}
-      </div>
-    </div>
+      <span className={TIME}>{time}</span>
+      <span className={cn(NAME, short ? "line-clamp-1" : "line-clamp-2", !on && STRUCK)}>
+        {title}
+      </span>
+      <Meta slot={slot} timetable={timetable} />
+    </Tappable>
   );
 }
 
@@ -395,7 +322,7 @@ export function Grid({ cls, layout, monday, today, selection, timetable, s, acti
                 .filter((block) => block.day === day)
                 .map((block) => (
                   <LessonBlock
-                    key={`${block.start}-${block.module}`}
+                    key={`${block.start}-${block.slot.module}`}
                     cls={cls}
                     block={block}
                     layout={layout}

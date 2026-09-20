@@ -1,9 +1,9 @@
 import type { Selection } from "./selection";
+import { mergeSlots, type Slot } from "./slots";
 import type {
   AcademicCalendar,
   AcademicEventType,
   ClassTimetable,
-  Lesson,
   Semester,
   Timetable,
 } from "./types";
@@ -15,7 +15,7 @@ export interface Occurrence {
   classId: string;
   classShort: string;
   className: string;
-  lesson: Lesson;
+  slot: Slot;
 }
 
 export interface AllDayEvent {
@@ -35,13 +35,6 @@ export function addDays(date: string, days: number): string {
   const d = new Date(`${date}T00:00:00Z`);
   d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().slice(0, 10);
-}
-
-/** Identifies a parallel group for the skip list: by teacher, else by room, else nothing to tell apart. */
-export function skipKey(lesson: Lesson): string | null {
-  if (lesson.teacher) return `${lesson.code}@${lesson.teacher}`;
-  if (lesson.room) return `${lesson.code}@${lesson.room}`;
-  return null;
 }
 
 /** The class for an id from a selection. */
@@ -90,8 +83,8 @@ function minDate(a: string, b: string): string {
 }
 
 function compareOccurrences(a: Occurrence, b: Occurrence): number {
-  const keyA = `${a.date} ${a.start} ${a.end} ${a.className} ${a.lesson.code} ${a.lesson.teacher ?? ""} ${a.lesson.room ?? ""}`;
-  const keyB = `${b.date} ${b.start} ${b.end} ${b.className} ${b.lesson.code} ${b.lesson.teacher ?? ""} ${b.lesson.room ?? ""}`;
+  const keyA = `${a.date} ${a.start} ${a.end} ${a.className} ${a.slot.module}`;
+  const keyB = `${b.date} ${b.start} ${b.end} ${b.className} ${b.slot.module}`;
   if (keyA < keyB) return -1;
   if (keyA > keyB) return 1;
   return 0;
@@ -100,7 +93,7 @@ function compareOccurrences(a: Occurrence, b: Occurrence): number {
 /**
  * Turns the weekly grids into dated occurrences for a selection: each published week applies
  * from its Monday until the next published week or the semester end, holidays and breaks are
- * dropped, skipped groups are hidden, and the same lesson reached through two classes appears once.
+ * dropped, and the same lesson reached through two classes appears once.
  */
 export function expandLessons(
   timetable: Timetable,
@@ -109,12 +102,8 @@ export function expandLessons(
 ): Occurrence[] {
   const chosen = selection.classes.map(({ classId, modules }) => {
     const cls = findClass(timetable, classId);
-    const lessons = cls.lessons.filter((lesson) => {
-      if (modules && !modules.includes(lesson.module)) return false;
-      const key = skipKey(lesson);
-      return key === null || !selection.skip.includes(key);
-    });
-    return { cls, lessons };
+    const lessons = cls.lessons.filter((lesson) => !modules || modules.includes(lesson.module));
+    return { cls, slots: mergeSlots(lessons) };
   });
 
   const closed = closedDates(calendar);
@@ -125,25 +114,25 @@ export function expandLessons(
     const semester = calendar.semesters.find((s) => s.start <= week.monday && week.monday <= s.end);
     if (!semester) throw new Error(`no semester in the academic calendar covers ${week.monday}`);
     const nextWeek = timetable.weeks[index + 1];
-    for (const { cls, lessons } of chosen) {
+    for (const { cls, slots } of chosen) {
       let rangeEnd = semesterEnd(semester, cls, calendar);
       if (nextWeek) rangeEnd = minDate(rangeEnd, addDays(nextWeek.monday, -1));
-      for (const lesson of lessons) {
-        if (lesson.week !== week.week) continue;
+      for (const slot of slots) {
+        if (slot.week !== week.week) continue;
         for (let monday = week.monday; monday <= rangeEnd; monday = addDays(monday, 7)) {
-          const date = addDays(monday, lesson.day - 1);
+          const date = addDays(monday, slot.day - 1);
           if (date > rangeEnd || date < semester.start || closed.has(date)) continue;
-          const key = `${date}|${lesson.start}|${lesson.end}|${lesson.teacher}|${lesson.room}|${moduleBase(lesson.module)}`;
+          const key = `${date}|${slot.start}|${slot.end}|${moduleBase(slot.module)}`;
           if (seen.has(key)) continue;
           seen.add(key);
           occurrences.push({
             date,
-            start: lesson.start,
-            end: lesson.end,
+            start: slot.start,
+            end: slot.end,
             classId: cls.id,
             classShort: cls.short,
             className: cls.name,
-            lesson,
+            slot,
           });
         }
       }

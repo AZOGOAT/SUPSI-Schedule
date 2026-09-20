@@ -129,7 +129,6 @@ export function ClassSection({
 }: SectionProps) {
   const cls = timetable.classes.find((c) => c.id === classId);
   const layout = cls ? layoutGrid(cls.lessons) : null;
-  const hasSplit = layout?.blocks.some((b) => b.groups.length > 1) ?? false;
   const monday = weekMonday(today, timetable, calendar);
   const semester = semesterLabel(timetable.semester, s);
   const sub =
@@ -174,7 +173,6 @@ export function ClassSection({
             s={s}
             actions={actions}
           />
-          {hasSplit && <p className={cn(HELP, "mt-3")}>{s.splitHelp}</p>}
         </>
       )}
     </section>
