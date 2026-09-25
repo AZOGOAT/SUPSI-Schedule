@@ -1,7 +1,7 @@
 {
   "source": "https://www3.supsi.ch/inside/area_riservata_dti/orari/definitivi/",
-  "sourceUpdatedAt": "2026-09-10T11:34",
-  "scrapedAt": "2026-09-19T17:18:13.486Z",
+  "sourceUpdatedAt": "2026-09-25T14:58",
+  "scrapedAt": "2026-09-25T17:12:12.506Z",
   "semester": "SEMESTRE AUTUNNALE 2026",
   "weeks": [
     {
@@ -360,8 +360,8 @@
     "D1.07": "Aula piccola (T)",
     "D1.08": "Aula piccola",
     "D1.09": "Aula piccola (T)",
-    "D1.10": "Aula piccola (T)",
     "D1.11": "Aula piccola (T)",
+    "D1.10": "Aula piccola (T)",
     "D1.12": "Aula piccola (T)",
     "D1.15": "Aula media"
   },
@@ -2131,7 +2131,7 @@
           "module": "B1204",
           "kind": "E",
           "name": "Numerica",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "KRS",
           "color": "#BCE0EA"
         },
@@ -2140,6 +2140,19 @@
           "day": 3,
           "start": "12:45",
           "end": "14:15",
+          "code": "C-E1201",
+          "module": "E1201",
+          "kind": "C",
+          "name": "Elettronica",
+          "room": "B1.14",
+          "teacher": "MOL",
+          "color": "#C2F0C2"
+        },
+        {
+          "week": 38,
+          "day": 3,
+          "start": "14:30",
+          "end": "16:00",
           "code": "E-I1204",
           "module": "I1204",
           "kind": "E",
@@ -2151,8 +2164,8 @@
         {
           "week": 38,
           "day": 3,
-          "start": "12:45",
-          "end": "14:15",
+          "start": "14:30",
+          "end": "16:00",
           "code": "E-I1204",
           "module": "I1204",
           "kind": "E",
@@ -2160,19 +2173,6 @@
           "room": "C1.06",
           "teacher": "PAG",
           "color": "#FFFF99"
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "14:30",
-          "end": "16:00",
-          "code": "C-E1201",
-          "module": "E1201",
-          "kind": "C",
-          "name": "Elettronica",
-          "room": "B1.14",
-          "teacher": "MOL",
-          "color": "#C2F0C2"
         },
         {
           "week": 38,
@@ -2420,19 +2420,6 @@
           "day": 3,
           "start": "12:45",
           "end": "14:15",
-          "code": "C-E1201",
-          "module": "E1201",
-          "kind": "C",
-          "name": "Elettronica",
-          "room": "B1.12",
-          "teacher": "MOL",
-          "color": "#C2F0C2"
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "14:30",
-          "end": "16:00",
           "code": "E-I1204",
           "module": "I1204",
           "kind": "E",
@@ -2444,8 +2431,8 @@
         {
           "week": 38,
           "day": 3,
-          "start": "14:30",
-          "end": "16:00",
+          "start": "12:45",
+          "end": "14:15",
           "code": "E-I1204",
           "module": "I1204",
           "kind": "E",
@@ -2453,6 +2440,19 @@
           "room": "C1.06",
           "teacher": "PAG",
           "color": "#FFFF99"
+        },
+        {
+          "week": 38,
+          "day": 3,
+          "start": "14:30",
+          "end": "16:00",
+          "code": "C-E1201",
+          "module": "E1201",
+          "kind": "C",
+          "name": "Elettronica",
+          "room": "B1.12",
+          "teacher": "MOL",
+          "color": "#C2F0C2"
         },
         {
           "week": 38,
@@ -2717,7 +2717,7 @@
           "module": "E3203",
           "kind": "L",
           "name": "Microcalcolatori",
-          "room": "D1.07",
+          "room": "0.01",
           "teacher": "ALL",
           "color": "#C2F0C2"
         },
@@ -2730,7 +2730,7 @@
           "module": "E3203",
           "kind": "L",
           "name": "Microcalcolatori",
-          "room": "D1.07",
+          "room": "0.01",
           "teacher": "PAG",
           "color": "#C2F0C2"
         },
@@ -2874,15 +2874,15 @@
         {
           "week": 38,
           "day": 1,
-          "start": "08:30",
+          "start": "09:15",
           "end": "10:00",
-          "code": "A",
-          "module": "A",
-          "kind": null,
-          "name": "Asincrone",
-          "room": null,
-          "teacher": null,
-          "color": null
+          "code": "L-E5201",
+          "module": "E5201",
+          "kind": "L",
+          "name": "Lab. Regolazione e controllo",
+          "room": "2.02",
+          "teacher": "BIA",
+          "color": "#C2F0C2"
         },
         {
           "week": 38,
@@ -3017,34 +3017,8 @@
         {
           "week": 38,
           "day": 3,
-          "start": "08:30",
+          "start": "09:15",
           "end": "11:45",
-          "code": "A",
-          "module": "A",
-          "kind": null,
-          "name": "Asincrone",
-          "room": null,
-          "teacher": null,
-          "color": null
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "13:30",
-          "end": "16:00",
-          "code": "C-E5420Y",
-          "module": "E5420Y",
-          "kind": "C",
-          "name": "Sistemi adattivi e di apprend",
-          "room": "0.02",
-          "teacher": "BIA",
-          "color": "#C2F0C2"
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "13:30",
-          "end": "16:00",
           "code": "C-E5430Y",
           "module": "E5430Y",
           "kind": "C",
@@ -3056,12 +3030,38 @@
         {
           "week": 38,
           "day": 3,
-          "start": "16:00",
-          "end": "16:45",
-          "code": "L-E5201",
-          "module": "E5201",
+          "start": "09:15",
+          "end": "11:45",
+          "code": "L-E5430Y",
+          "module": "E5430Y",
           "kind": "L",
-          "name": "Lab. Regolazione e controllo",
+          "name": "Lab. Edge AI; ML for Embedded",
+          "room": "2.02",
+          "teacher": "PLS",
+          "color": "#C2F0C2"
+        },
+        {
+          "week": 38,
+          "day": 3,
+          "start": "12:45",
+          "end": "15:15",
+          "code": "C-E5420Y",
+          "module": "E5420Y",
+          "kind": "C",
+          "name": "Sistemi adattivi e di apprend",
+          "room": "2.02",
+          "teacher": "BIA",
+          "color": "#C2F0C2"
+        },
+        {
+          "week": 38,
+          "day": 3,
+          "start": "12:45",
+          "end": "15:15",
+          "code": "E-E5420Y",
+          "module": "E5420Y",
+          "kind": "E",
+          "name": "Es. Sistemi adattivi e di app",
           "room": "2.02",
           "teacher": "BIA",
           "color": "#C2F0C2"
@@ -3114,7 +3114,7 @@
           "module": "C5201",
           "kind": "C",
           "name": "Economia aziendale applicata",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -3127,7 +3127,7 @@
           "module": "C5201",
           "kind": "E",
           "name": "Es. Economia aziendale applic",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -3382,7 +3382,7 @@
           "kind": "E",
           "name": "Principi di economia",
           "room": "D1.02",
-          "teacher": "MTR",
+          "teacher": "SOR",
           "color": "#E6B8B7"
         },
         {
@@ -3766,7 +3766,7 @@
           "kind": "E",
           "name": "Principi di economia",
           "room": "D1.04",
-          "teacher": "MTR",
+          "teacher": "SOR",
           "color": "#E6B8B7"
         },
         {
@@ -4417,6 +4417,19 @@
         {
           "week": 38,
           "day": 5,
+          "start": "12:45",
+          "end": "13:30",
+          "code": "E-B3204P",
+          "module": "B3204P",
+          "kind": "E",
+          "name": "Es. statistica 1",
+          "room": "D1.01",
+          "teacher": "VIL",
+          "color": "#BCE0EA"
+        },
+        {
+          "week": 38,
+          "day": 5,
           "start": "13:30",
           "end": "15:15",
           "code": "C-B1210P",
@@ -4431,20 +4444,7 @@
           "week": 38,
           "day": 5,
           "start": "15:15",
-          "end": "16:00",
-          "code": "E-B3204P",
-          "module": "B3204P",
-          "kind": "E",
-          "name": "Es. ProbabilitÃffÃ?'Ãf?ÃÂ¢",
-          "room": "D1.01",
-          "teacher": "VIL",
-          "color": "#BCE0EA"
-        },
-        {
-          "week": 38,
-          "day": 5,
-          "start": "16:00",
-          "end": "17:30",
+          "end": "16:45",
           "code": "C-C1201P",
           "module": "C1201P",
           "kind": "C",
@@ -4585,7 +4585,7 @@
           "code": "C-G5202",
           "module": "G5202",
           "kind": "C",
-          "name": "ContabilitÃffÃ?'Ãf?ÃÂ¢?TÃ",
+          "name": "ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ¢?TÃ",
           "room": null,
           "teacher": "CNV",
           "color": "#E6B8B7"
@@ -4598,7 +4598,7 @@
           "code": "C-G5202",
           "module": "G5202",
           "kind": "C",
-          "name": "ContabilitÃffÃ?'Ãf?ÃÂ¢?TÃ",
+          "name": "ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ¢?TÃ",
           "room": "D1.03",
           "teacher": "SOR",
           "color": "#E6B8B7"
@@ -4689,7 +4689,7 @@
           "code": "C-G5201",
           "module": "G5201",
           "kind": "C",
-          "name": "ContabilitÃffÃ?'Ãf?ÃÂ¢?TÃ",
+          "name": "ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ¢?TÃ",
           "room": "D1.03",
           "teacher": "PEN",
           "color": "#E6B8B7"
@@ -4702,7 +4702,7 @@
           "code": "E-G5201",
           "module": "G5201",
           "kind": "E",
-          "name": "Es. ContabilitÃffÃ?'Ãf?ÃÂ",
+          "name": "Es. ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ",
           "room": "D1.03",
           "teacher": "PEN",
           "color": "#E6B8B7"
@@ -4754,7 +4754,7 @@
           "code": "E-G5202",
           "module": "G5202",
           "kind": "E",
-          "name": "Es. ContabilitÃffÃ?'Ãf?ÃÂ",
+          "name": "Es. ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ",
           "room": "D1.03",
           "teacher": "CNV",
           "color": "#E6B8B7"
@@ -4767,7 +4767,7 @@
           "code": "E-G5202",
           "module": "G5202",
           "kind": "E",
-          "name": "Es. ContabilitÃffÃ?'Ãf?ÃÂ",
+          "name": "Es. ContabilitÃƒffÃƒ?'Ãƒf?ÃƒÂ",
           "room": "D1.03",
           "teacher": "SOR",
           "color": "#E6B8B7"
@@ -5087,7 +5087,7 @@
           "module": "E1204",
           "kind": "E",
           "name": "Digitale",
-          "room": "D1.10",
+          "room": "B1.02",
           "teacher": "TVL",
           "color": "#C2F0C2"
         },
@@ -5445,7 +5445,7 @@
           "module": "I1202",
           "kind": "L",
           "name": "Lab. programmazione",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "FRE",
           "color": "#FFFF99"
         },
@@ -6031,7 +6031,7 @@
           "module": "I1206P",
           "kind": "C",
           "name": "Ambienti",
-          "room": null,
+          "room": "B1.07",
           "teacher": "GAL",
           "color": "#FFFF99"
         },
@@ -6077,7 +6077,7 @@
           "module": "B3201",
           "kind": "C",
           "name": "Analisi",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "GAR",
           "color": "#BCE0EA"
         },
@@ -6090,7 +6090,7 @@
           "module": "I3201",
           "kind": "C",
           "name": "Linguaggi",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "PED",
           "color": "#FFFF99"
         },
@@ -6103,7 +6103,7 @@
           "module": "B3205",
           "kind": "E",
           "name": "Matematica",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "VIL",
           "color": "#BCE0EA"
         },
@@ -6116,7 +6116,7 @@
           "module": "I3201",
           "kind": "E",
           "name": "Programmazione procedurale",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "FRE",
           "color": "#FFFF99"
         },
@@ -6142,7 +6142,7 @@
           "module": "E3204",
           "kind": "C",
           "name": "Microcontrollori",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "TVL",
           "color": "#C2F0C2"
         },
@@ -6155,7 +6155,7 @@
           "module": "B3205",
           "kind": "C",
           "name": "Matematica",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "VIL",
           "color": "#BCE0EA"
         },
@@ -6168,7 +6168,7 @@
           "module": "I3204",
           "kind": "C",
           "name": "Reti",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "POR",
           "color": "#FFFF99"
         },
@@ -6220,7 +6220,7 @@
           "module": "B3204",
           "kind": "C",
           "name": "Statistica",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "CMP",
           "color": "#BCE0EA"
         },
@@ -6246,7 +6246,7 @@
           "module": "I3203",
           "kind": "L",
           "name": "Strutture dati",
-          "room": "C1.02",
+          "room": "A1.02",
           "teacher": "BSS",
           "color": "#FFFF99"
         },
@@ -6259,7 +6259,7 @@
           "module": "I3203",
           "kind": "L",
           "name": "Strutture dati",
-          "room": "C1.02",
+          "room": "A1.02",
           "teacher": "SAL",
           "color": "#FFFF99"
         },
@@ -6272,7 +6272,7 @@
           "module": "I3202",
           "kind": "C",
           "name": "Programmazione a oggetti",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "LEI",
           "color": "#FFFF99"
         },
@@ -6285,7 +6285,7 @@
           "module": "I3202",
           "kind": "E",
           "name": "Es. Programmazione a oggetti",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "FRE",
           "color": "#FFFF99"
         },
@@ -6298,7 +6298,7 @@
           "module": "I3202",
           "kind": "E",
           "name": "Es. Programmazione a oggetti",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "LEI",
           "color": "#FFFF99"
         },
@@ -6311,7 +6311,7 @@
           "module": "B3201",
           "kind": "E",
           "name": "Analisi",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "GAR",
           "color": "#BCE0EA"
         },
@@ -6324,7 +6324,7 @@
           "module": "B3204",
           "kind": "E",
           "name": "Statistica",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "CMP",
           "color": "#BCE0EA"
         },
@@ -6370,7 +6370,7 @@
           "module": "B3205",
           "kind": "C",
           "name": "Matematica",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "VIL",
           "color": "#BCE0EA"
         },
@@ -6383,7 +6383,7 @@
           "module": "B3201",
           "kind": "E",
           "name": "Analisi",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "GAR",
           "color": "#BCE0EA"
         },
@@ -6396,7 +6396,7 @@
           "module": "I3201",
           "kind": "C",
           "name": "Linguaggi",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "PED",
           "color": "#FFFF99"
         },
@@ -6409,7 +6409,7 @@
           "module": "B3204",
           "kind": "E",
           "name": "Statistica",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "CMP",
           "color": "#BCE0EA"
         },
@@ -6422,7 +6422,7 @@
           "module": "I3201",
           "kind": "E",
           "name": "Programmazione procedurale",
-          "room": "D1.11",
+          "room": "D1.10",
           "teacher": "FRE",
           "color": "#FFFF99"
         },
@@ -6500,7 +6500,7 @@
           "module": "B3205",
           "kind": "E",
           "name": "Matematica",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "VIL",
           "color": "#BCE0EA"
         },
@@ -6552,7 +6552,7 @@
           "module": "I3203",
           "kind": "L",
           "name": "Strutture dati",
-          "room": "C1.02",
+          "room": "A1.02",
           "teacher": "BSS",
           "color": "#FFFF99"
         },
@@ -6565,7 +6565,7 @@
           "module": "I3203",
           "kind": "L",
           "name": "Strutture dati",
-          "room": "C1.02",
+          "room": "A1.02",
           "teacher": "SAL",
           "color": "#FFFF99"
         },
@@ -6578,7 +6578,7 @@
           "module": "B3201",
           "kind": "C",
           "name": "Analisi",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "GAR",
           "color": "#BCE0EA"
         },
@@ -6591,7 +6591,7 @@
           "module": "I3202",
           "kind": "C",
           "name": "Programmazione a oggetti",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "CLZ",
           "color": "#FFFF99"
         },
@@ -6604,7 +6604,7 @@
           "module": "I3202",
           "kind": "E",
           "name": "Es. Programmazione a oggetti",
-          "room": "B1.02",
+          "room": "D1.11",
           "teacher": "CLZ",
           "color": "#FFFF99"
         },
@@ -6683,8 +6683,8 @@
         {
           "week": 38,
           "day": 5,
-          "start": "16:00",
-          "end": "17:30",
+          "start": "15:15",
+          "end": "16:45",
           "code": "C-C1201P",
           "module": "C1201P",
           "kind": "C",
@@ -6709,15 +6709,41 @@
           "module": "I5204",
           "kind": "C",
           "name": "Algoritmi avanzati",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "MST",
           "color": "#FFFF99"
         },
         {
           "week": 38,
           "day": 1,
-          "start": "12:45",
-          "end": "16:00",
+          "start": "10:15",
+          "end": "12:30",
+          "code": "L-I5201",
+          "module": "I5201",
+          "kind": "L",
+          "name": "Lab. Ingegneria e sviluppo so",
+          "room": "B3.05",
+          "teacher": "COT",
+          "color": "#FFFF99"
+        },
+        {
+          "week": 38,
+          "day": 1,
+          "start": "10:15",
+          "end": "12:30",
+          "code": "L-I5201",
+          "module": "I5201",
+          "kind": "L",
+          "name": "Lab. Ingegneria e sviluppo so",
+          "room": "B3.05",
+          "teacher": "GLT",
+          "color": "#FFFF99"
+        },
+        {
+          "week": 38,
+          "day": 1,
+          "start": "13:30",
+          "end": "16:45",
           "code": "A",
           "module": "A",
           "kind": null,
@@ -6735,7 +6761,7 @@
           "module": "I5201",
           "kind": "C",
           "name": "Ingegneria e sviluppo softwar",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "PED",
           "color": "#FFFF99"
         },
@@ -6748,7 +6774,7 @@
           "module": "I5201",
           "kind": "C",
           "name": "Ingegneria e sviluppo softwar",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "GAL",
           "color": "#FFFF99"
         },
@@ -6761,34 +6787,8 @@
           "module": "I5203",
           "kind": "C",
           "name": "Grafica",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "PET",
-          "color": "#FFFF99"
-        },
-        {
-          "week": 38,
-          "day": 2,
-          "start": "14:30",
-          "end": "16:45",
-          "code": "L-I5201",
-          "module": "I5201",
-          "kind": "L",
-          "name": "Lab. Ingegneria e sviluppo so",
-          "room": "B3.05",
-          "teacher": "COT",
-          "color": "#FFFF99"
-        },
-        {
-          "week": 38,
-          "day": 2,
-          "start": "14:30",
-          "end": "16:45",
-          "code": "L-I5201",
-          "module": "I5201",
-          "kind": "L",
-          "name": "Lab. Ingegneria e sviluppo so",
-          "room": "B3.05",
-          "teacher": "GLT",
           "color": "#FFFF99"
         },
         {
@@ -6800,7 +6800,7 @@
           "module": "I5420Y",
           "kind": "C",
           "name": "System Management e sistemi d",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "CON",
           "color": "#FFFF99"
         },
@@ -6813,7 +6813,7 @@
           "module": "I5420Y",
           "kind": "L",
           "name": "Lab. System Management e sist",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "CON",
           "color": "#FFFF99"
         },
@@ -6826,7 +6826,7 @@
           "module": "I5203",
           "kind": "L",
           "name": "Lab. Grafica",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "PAO",
           "color": "#FFFF99"
         },
@@ -6839,7 +6839,7 @@
           "module": "I5203",
           "kind": "L",
           "name": "Lab. Grafica",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "PET",
           "color": "#FFFF99"
         },
@@ -6904,7 +6904,7 @@
           "module": "I5202",
           "kind": "E",
           "name": "Es. Sistemi operativi",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "GLB",
           "color": "#FFFF99"
         },
@@ -6917,7 +6917,7 @@
           "module": "C5201",
           "kind": "C",
           "name": "Economia aziendale applicata",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -6930,7 +6930,7 @@
           "module": "C5201",
           "kind": "E",
           "name": "Es. Economia aziendale applic",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -7015,22 +7015,35 @@
           "module": "I5204",
           "kind": "C",
           "name": "Algoritmi avanzati",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "MST",
           "color": "#FFFF99"
         },
         {
           "week": 38,
           "day": 1,
-          "start": "12:45",
-          "end": "16:00",
-          "code": "A",
-          "module": "A",
-          "kind": null,
-          "name": "Asincrone",
-          "room": null,
-          "teacher": null,
-          "color": null
+          "start": "10:15",
+          "end": "12:30",
+          "code": "C-I5410Y",
+          "module": "I5410Y",
+          "kind": "C",
+          "name": "Progettazione web",
+          "room": "D1.02",
+          "teacher": "SOM",
+          "color": "#FFFF99"
+        },
+        {
+          "week": 38,
+          "day": 1,
+          "start": "10:15",
+          "end": "12:30",
+          "code": "C-I5440Y",
+          "module": "I5440Y",
+          "kind": "C",
+          "name": "Computer Vision and Deep Lear",
+          "room": "B1.10",
+          "teacher": "GST",
+          "color": "#FFFF99"
         },
         {
           "week": 38,
@@ -7070,6 +7083,19 @@
           "room": "B3.05",
           "teacher": "FEG",
           "color": "#FFFF99"
+        },
+        {
+          "week": 38,
+          "day": 2,
+          "start": "14:30",
+          "end": "17:30",
+          "code": "A",
+          "module": "A",
+          "kind": null,
+          "name": "Asincrone",
+          "room": null,
+          "teacher": null,
+          "color": null
         },
         {
           "week": 38,
@@ -7113,40 +7139,14 @@
         {
           "week": 38,
           "day": 3,
-          "start": "13:30",
-          "end": "14:15",
+          "start": "12:45",
+          "end": "13:30",
           "code": "C-I5201",
           "module": "I5201",
           "kind": "C",
           "name": "Ingegneria e sviluppo softwar",
           "room": "B1.07",
           "teacher": "GAL",
-          "color": "#FFFF99"
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "14:30",
-          "end": "16:45",
-          "code": "C-I5410Y",
-          "module": "I5410Y",
-          "kind": "C",
-          "name": "Progettazione web",
-          "room": "B3.05",
-          "teacher": "SOM",
-          "color": "#FFFF99"
-        },
-        {
-          "week": 38,
-          "day": 3,
-          "start": "14:30",
-          "end": "16:45",
-          "code": "C-I5440Y",
-          "module": "I5440Y",
-          "kind": "C",
-          "name": "Computer Vision and Deep Lear",
-          "room": "B1.09",
-          "teacher": "GST",
           "color": "#FFFF99"
         },
         {
@@ -7210,7 +7210,7 @@
           "module": "I5202",
           "kind": "E",
           "name": "Es. Sistemi operativi",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "GLB",
           "color": "#FFFF99"
         },
@@ -7223,7 +7223,7 @@
           "module": "C5201",
           "kind": "C",
           "name": "Economia aziendale applicata",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -7236,7 +7236,7 @@
           "module": "C5201",
           "kind": "E",
           "name": "Es. Economia aziendale applic",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -7412,7 +7412,7 @@
           "module": "I4205P",
           "kind": "E",
           "name": "Es. Linguaggi e framework",
-          "room": "D1.10",
+          "room": "B1.02",
           "teacher": "BRO",
           "color": "#FFFF99"
         },
@@ -7425,7 +7425,7 @@
           "module": "I4203P",
           "kind": "C",
           "name": "Programmazione parallela",
-          "room": "D1.10",
+          "room": "B1.02",
           "teacher": "GRO",
           "color": "#FFFF99"
         },
@@ -7438,7 +7438,7 @@
           "module": "I4208P",
           "kind": "E",
           "name": "Es. Applicazioni web",
-          "room": "D1.10",
+          "room": "B1.02",
           "teacher": "GRE",
           "color": "#FFFF99"
         },
@@ -7451,7 +7451,7 @@
           "module": "D4209P",
           "kind": "E",
           "name": "Es. Data Science",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "GST",
           "color": "#FFE4C9"
         },
@@ -7490,7 +7490,7 @@
           "module": "I4207P",
           "kind": "E",
           "name": "Es. Sistemi per la persistenza",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "MAS",
           "color": "#FFFF99"
         }
@@ -8148,7 +8148,7 @@
           "module": "B1205",
           "kind": "E",
           "name": "Numerica",
-          "room": "D1.10",
+          "room": "D1.11",
           "teacher": "KRS",
           "color": "#BCE0EA"
         },
@@ -8799,7 +8799,7 @@
           "module": "C5201",
           "kind": "C",
           "name": "Economia aziendale applicata",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -8812,7 +8812,7 @@
           "module": "C5201",
           "kind": "E",
           "name": "Es. Economia aziendale applic",
-          "room": "A1.02",
+          "room": "C1.02",
           "teacher": "SCA",
           "color": "#FFCCFF"
         },
@@ -9761,10 +9761,10 @@
           "day": 1,
           "start": "10:15",
           "end": "11:45",
-          "code": "C-E0201",
-          "module": "E0201",
+          "code": "C-E0202",
+          "module": "E0202",
           "kind": "C",
-          "name": "Analogica",
+          "name": "Digitale",
           "room": "0.03",
           "teacher": "PAG",
           "color": "#D9D9D9"
@@ -9774,10 +9774,10 @@
           "day": 1,
           "start": "10:15",
           "end": "11:45",
-          "code": "L-E0201",
-          "module": "E0201",
+          "code": "L-E0202",
+          "module": "E0202",
           "kind": "L",
-          "name": "Analogica",
+          "name": "Digitale",
           "room": "B1.15",
           "teacher": "PAG",
           "color": "#D9D9D9"
@@ -9817,7 +9817,7 @@
           "module": "E0202",
           "kind": "L",
           "name": "Digitale",
-          "room": "0.01",
+          "room": "0.03",
           "teacher": "PAG",
           "color": "#D9D9D9"
         },
